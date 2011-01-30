@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" backgroundColor="#FEFEFF" skinClass="spark.skins.spark.ApplicationSkin" creationComplete="init();">
+	<s:layout>
+		<s:VerticalLayout horizontalAlign="center"/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<mx:StringValidator id="svUsername" source="{username}" property="text" required="true" trigger="{btnSubmit}" triggerEvent="click"/>
+	</fx:Declarations>
+	
+	<s:Group verticalCenter="-9" horizontalCenter="24" height="524">
+		
+		<s:layout>
+			<s:VerticalLayout horizontalAlign="center" paddingTop="70"/>
+		</s:layout>
+		
+		<mx:Form x="208" y="109" width="335" height="103">
+			<mx:FormHeading label="Twitter Account Info" height="33"/>
+			<mx:FormItem label="Login: " height="30" width="302" required="true" fontSize="12">
+				<s:TextInput  height="23" width="160" id="username" />
+			</mx:FormItem>
+		</mx:Form>
+		<s:Group width="336" height="36">
+			<s:Button x="107" y="5" id="btnSubmit" label="Get Friends" width="81" height="24" click="controller.submit(event)" toolTip="Click to get twitter friends"/>
+		</s:Group>
+			<s:Scroller width="100%" height="276">
+				<s:TileGroup width="911" height="266" id="friendsFrame" orientation="rows" horizontalAlign="center" verticalAlign="middle">
+				</s:TileGroup>
+			</s:Scroller>
+		
+		<fx:Script>
+			<![CDATA[
+				import twitter.TwitterApi;
+	
+				
+				public var controller : TwitterApi;
+				public function init() : void {
+					controller = new TwitterApi(this);
+				}
+				
+			]]>
+		</fx:Script>
+	</s:Group>
+	
+</s:Application>
